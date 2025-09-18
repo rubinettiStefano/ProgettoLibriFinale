@@ -23,11 +23,12 @@
         }
         .card {
             background: white;
-            max-width: 650px;
+            max-width: 680px;
             width: 100%;
             border-radius: 15px;
             box-shadow: 0 10px 35px rgba(52,73,94,0.12);
             padding: 30px 40px;
+            box-sizing: border-box;
         }
         h1 {
             font-weight: 700;
@@ -91,11 +92,40 @@
             transition: all 0.3s ease;
             text-decoration: none;
             display: inline-block;
+            margin-bottom: 30px;
         }
         .btn-home:hover {
             background: linear-gradient(45deg, #ff9671, #ff6f91);
             box-shadow: 0 12px 20px rgba(255, 150, 113, 0.6);
             transform: scale(1.1);
+        }
+        /* Preface styles */
+        .preface-section {
+            margin-top: 40px;
+            padding: 24px 32px;
+            background: #f0f8f7;
+            border-left: 6px solid #009879;
+            border-radius: 12px;
+            box-shadow: inset 0 0 12px #d1f0ea;
+        }
+        .preface-section h2 {
+            color: #007960;
+            font-weight: 700;
+            font-size: 1.8rem;
+            margin-bottom: 16px;
+        }
+        .preface-author {
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: #004d40;
+            margin-bottom: 12px;
+            user-select: none;
+        }
+        .preface-content {
+            font-size: 1.05rem;
+            line-height: 1.5;
+            color: #165347;
+            white-space: pre-wrap; /* Keep line breaks if any */
         }
     </style>
 </head>
@@ -126,7 +156,12 @@
         </div>
     </div>
 
-</div>
+    <div class="preface-section">
+        <h2>Prefazione</h2>
+        <div class="preface-author">Autore: ${b.getPreface().getWriterName()}</div>
+        <div class="preface-content">${b.getPreface().getContent()}</div>
+    </div>
 
+</div>
 </body>
 </html>

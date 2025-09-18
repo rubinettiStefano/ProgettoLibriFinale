@@ -1,0 +1,5 @@
+1) Copiancollate il author e publisher del vostro model qui dentro
+2) Fare pagina per riassunto autori con dentro solo nome e cognome,
+ e un filtro che è basato sul testo di nome e cognome
+3) Fare pagina dettaglio autore uguale alla mia del libro
+    senza però mostrare ancora dati dei libri o del publisher

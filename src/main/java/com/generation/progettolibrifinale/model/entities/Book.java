@@ -27,4 +27,7 @@ public class Book extends BaseEntity
     private Set<Locale> languages = new HashSet<>();
     @ElementCollection(fetch = FetchType.EAGER)
     private Set<String> reviews = new HashSet<>();
+
+    @OneToOne(mappedBy = "book",fetch = FetchType.EAGER)
+    private Preface preface;
 }

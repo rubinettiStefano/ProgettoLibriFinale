@@ -1,12 +1,15 @@
 package com.generation.progettolibrifinale;
 
 import com.generation.progettolibrifinale.model.entities.Book;
+import com.generation.progettolibrifinale.model.entities.Preface;
 import com.generation.progettolibrifinale.model.enums.Locale;
 import com.generation.progettolibrifinale.model.repositories.BookRepository;
+import com.generation.progettolibrifinale.model.repositories.PrefaceRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -15,6 +18,9 @@ class ProgettoLibriFinaleApplicationTests {
 
     @Autowired
     BookRepository repo;
+
+    @Autowired
+    PrefaceRepository pRepo;
 
     @Test
     void contextLoads()
@@ -58,6 +64,27 @@ class ProgettoLibriFinaleApplicationTests {
 //        repo.deleteById(52L);
 //        repo.deleteById(53L);
 //        repo.deleteById(54L);
+        Preface preface1 = new Preface();
+        preface1.setWriterName("Mario Rossi");
+        preface1.setContent("Prefazione molto interessante e ricca di approfondimenti storici.");
+        preface1.setBook(repo.findById(1L).get());
+
+        Preface preface2 = new Preface();
+        preface2.setWriterName("Anna Bianchi");
+        preface2.setContent("Un’introduzione esaustiva che inquadra perfettamente il tema del libro.");
+        preface2.setBook(repo.findById(2L).get());
+
+        Preface preface3 = new Preface();
+        preface3.setWriterName("Luca Verdi");
+        preface3.setContent("Grande lavoro di sintesi con uno stile coinvolgente e chiaro.");
+        preface3.setBook(repo.findById(3L).get());
+
+        List<Preface> prefaces = new ArrayList<>();
+        prefaces.add(preface1);
+        prefaces.add(preface2);
+        prefaces.add(preface3);
+
+        pRepo.saveAll(prefaces);
     }
 
 }
