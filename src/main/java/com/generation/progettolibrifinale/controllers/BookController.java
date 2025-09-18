@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -19,9 +20,21 @@ public class BookController
 
     //localhost:8080/book/all
     @GetMapping("all")
-    public String allBooks(Model m)
+    public String allBooks
+    (
+            Model m,
+            @RequestParam(required = false) Integer ky,
+            @RequestParam(required = false) String r
+    )
     {
-        List<Book> books = repo.findAll();
+        List<Book> books;
+        if(r!=null || ky==null)
+            books=repo.findAll();
+        else
+        {
+            books = repo.filtraPerAnno(ky);
+            m.addAttribute("kycurrent",ky);
+        }
         m.addAttribute("books",books);
         return "summarybooks";
     }

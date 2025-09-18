@@ -4,6 +4,8 @@
        e assegnalo a questa variabile
  --%>
 @param List<Book> books
+@param Integer kycurrent = null
+
 
 <!doctype html>
 <html lang="en">
@@ -96,11 +98,112 @@
                 padding: 9px 7px;
             }
         }
+
+        .filter-form {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 10px;
+            margin: 0 auto 28px auto;
+            padding: 18px 70px 18px 16px;
+            max-width: 480px;
+            background: rgba(243, 249, 255, 0.85);
+            backdrop-filter: blur(6px) saturate(130%);
+            border-radius: 14px;
+            box-shadow: 0 2px 18px #afd0ee55;
+            border: 1.2px solid #e2eefc;
+            transition: box-shadow 0.2s;
+        }
+        .filter-form:focus-within {
+            box-shadow: 0 4px 44px #7ad9bb38;
+            border-color: #79eec9;
+        }
+        .filter-label {
+            color: #009879;
+            font-weight: 700;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            margin-right: 5px;
+        }
+        .filter-input {
+            font-size: 1.05em;
+            padding: 8px 13px;
+            border-radius: 8px;
+            border: 1.2px solid #b8e6da;
+            outline: none;
+            background: #fafbff;
+            margin-right: 8px;
+            transition: border 0.2s, box-shadow 0.2s;
+            box-shadow: 0 1px 4px #ddeafd28;
+        }
+        .filter-input:focus {
+            border-color: #009879;
+            box-shadow: 0 2px 16px #b7ffe688;
+        }
+        .filter-btn {
+            background: linear-gradient(90deg, #009879 70%, #24e3bb 100%);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-size: 1em;
+            font-weight: 700;
+            padding: 8px 22px;
+            cursor: pointer;
+            margin-left: 2px;
+            margin-right: 2px;
+            box-shadow: 0 2px 6px #cef8e2a9;
+            transition: background 0.22s, transform 0.11s;
+        }
+        .filter-btn:hover, .filter-btn:focus {
+            background: #009879;
+            transform: translateY(-2px) scale(1.05);
+        }
+        .filter-btn.reset {
+            background: linear-gradient(90deg, #ff7e67 70%, #ffd25c 100%);
+            color: #464646;
+            margin-left: 10px;
+            font-weight: 700;
+            box-shadow: 0 1px 7px #ffd27a69;
+        }
+        .icon-filter {
+            min-width: 20px;
+            min-height: 20px;
+            vertical-align: sub;
+            margin-right: 3px;
+        }
+        @media (max-width: 700px) {
+            .filter-form {
+                flex-direction: column;
+                align-items: stretch;
+                padding: 13px 5px;
+            }
+            .filter-btn, .filter-btn.reset {
+                width: 100%;
+                margin-top: 7px;
+                margin-left: 0;
+                margin-right: 0;
+            }
+        }
+
     </style>
 </head>
 <body>
 <div class="container">
     <h1>Lista Libri</h1>
+
+    <!-- NON METTERE ACTION SIGNIFICA FARE REQUEST A URL DOVE SIAMO-->
+    <form method="get" class="filter-form">
+        <label for="ky" class="filter-label">
+            <svg class="icon-filter" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#009879" stroke-width="2"><path d="M4 4h16v2l-7 8v6l-2 2v-8L4 6V4z"/></svg>
+            Year:
+        </label>
+        <input name="ky" id="ky" type="number" value="${kycurrent}" placeholder="e.g. 2022" class="filter-input">
+        <button type="submit" class="filter-btn">Filtra</button>
+        <button type="submit" name="r" value="1" class="filter-btn reset">Reset</button>
+    </form>
+
     <table class="styled-table">
         <thead>
         <tr>
