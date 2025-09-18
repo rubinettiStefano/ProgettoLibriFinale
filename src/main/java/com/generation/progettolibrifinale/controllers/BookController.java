@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("book")//aggiunge questo come prefisso degli uri
@@ -37,6 +38,24 @@ public class BookController
         }
         m.addAttribute("books",books);
         return "summarybooks";
+    }
+
+    @GetMapping("detail")
+    public String bookDetail
+            (
+                    Model m,
+                    @RequestParam(required = false) Long id
+            )
+    {
+        Optional<Book> op = repo.findById(id);
+
+        if(op.isPresent())
+        {
+            m.addAttribute("b",op.get());
+            return "bookdetail";
+        }
+        else
+            return "404NOTFOUND";
     }
 
 }

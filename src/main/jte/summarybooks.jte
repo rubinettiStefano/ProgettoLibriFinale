@@ -187,6 +187,32 @@
             }
         }
 
+        .btn-detail {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #009879 0%, #27e2ae 100%);
+            padding: 6px;
+            border-radius: 50%;
+            box-shadow: 0 4px 8px rgba(39, 226, 174, 0.6);
+            transition: transform 0.2s ease, box-shadow 0.3s ease;
+            text-decoration: none;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+        }
+
+        .btn-detail:hover, .btn-detail:focus {
+            transform: scale(1.15);
+            box-shadow: 0 6px 12px rgba(39, 226, 174, 0.8);
+        }
+
+        .icon-circle {
+            width: 24px;
+            height: 24px;
+        }
+
+
     </style>
 </head>
 <body>
@@ -210,15 +236,27 @@
             <th>ID</th>
             <th>Title</th>
             <th>Year</th>
+            <th>Detail</th>
         </tr>
         </thead>
         <tbody>
         @for(Book b:books)
-            <tr>
-                <td>${b.getId()}</td>
-                <td>${b.getTitle()}</td>
-                <td>${b.getReleasedIn()}</td>
-            </tr>
+               <tr>
+                    <td> ${b.getId()} </td>
+                    <td>${b.getTitle()}</td>
+                    <td>${b.getReleasedIn()}</td>
+                   <td>
+                       <a href="/book/detail?id=${b.getId()}" class="btn-detail" title="Vai a dettaglio" aria-label="Vai a dettaglio">
+                           <svg class="icon-circle" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                               <circle cx="12" cy="12" r="10" />
+                               <polyline points="12 16 16 12 12 8" />
+                               <line x1="8" y1="12" x2="16" y2="12" />
+                           </svg>
+                       </a>
+                   </td>
+
+               </tr>
+
         @endfor
         </tbody>
     </table>
