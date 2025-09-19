@@ -30,4 +30,7 @@ public class Book extends BaseEntity
 
     @OneToOne(mappedBy = "book",fetch = FetchType.EAGER)
     private Preface preface;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    private Author author;
 }
