@@ -1,13 +1,14 @@
 package com.generation.progettolibrifinale.controllers;
 
+import com.generation.progettolibrifinale.model.dtos.BookDto;
+import com.generation.progettolibrifinale.model.entities.Author;
 import com.generation.progettolibrifinale.model.entities.Book;
+import com.generation.progettolibrifinale.model.repositories.AuthorRepository;
 import com.generation.progettolibrifinale.model.repositories.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -18,6 +19,9 @@ public class BookController
 {
     @Autowired
     BookRepository repo;
+
+    @Autowired
+    AuthorRepository aRepo;
 
     //localhost:8080/book/all
     @GetMapping("all")
@@ -56,6 +60,22 @@ public class BookController
         }
         else
             return "404NOTFOUND";
+    }
+
+    @PostMapping("save")
+    public String save(@ModelAttribute BookDto dto)
+    {
+        Book b = new Book();
+        b.setTitle(dto.getTitle());
+        b.setPrice(dto.getPrice());
+        b.setCopiesSold(dto.getCopiesSold());
+        b.setReleasedIn(dto.getReleasedIn());
+
+        Author a = aRepo.findById(dto.getAuthor_id()).get();
+        b.setAuthor(a);
+
+        repo.save(b);
+        return "redirect:/author/detail?id="+dto.getAuthor_id();
     }
 
 }

@@ -11,4 +11,10 @@ public interface AuthorRepository extends JpaRepository<Author,Long>
     @Query("SELECT a FROM Author a WHERE a.name like %:key% OR a.surname like %:key%")
 //    @Query("SELECT a FROM Author a WHERE CONCAT(a.name,' ',a.surname) like %:key%")
     List<Author> filtraPerNominativo(String key);
+
+    @Query("SELECT a FROM Author a WHERE a.name= :name")
+    List<Author> prendiPerNome(String name);
+
+    List<Author> findAllByName(String name);
+
 }
